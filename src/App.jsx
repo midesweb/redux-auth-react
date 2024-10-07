@@ -41,7 +41,7 @@ function App() {
         </Router>
       </div>
       <footer>
-        © 2023 Mi Aplicación
+        © 2024 Mi Aplicación
       </footer>
     </>
   );
