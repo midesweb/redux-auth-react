@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAxios } from "../lib/axios";
-import { negativeFeedback, positiveFeedback } from "./app-slice";
+import { negativeFeedback, positiveFeedback, startLoading, stopLoading } from "./app-slice";
 
 export const userSlice = createSlice({
   name: 'user',
@@ -43,6 +43,7 @@ const { registerUser, setRegisterValidationErrors, setLoginValidationErrors, log
 export const { registerToken, initialized } = userSlice.actions;
 
 export const signUp = (userData) => async (dispatch) => {
+  dispatch(startLoading());
   const axios = getAxios();
   try {
     const response = await axios.post('/api/auth/register', userData);
@@ -63,10 +64,13 @@ export const signUp = (userData) => async (dispatch) => {
     } else {
       dispatch(negativeFeedback('Registro no disponible'));
     }
+  } finally {
+    dispatch(stopLoading());
   }
 } 
 
 export const signIn = (userData) => async (dispatch) => {
+  dispatch(startLoading());
   const axios = getAxios();
   try {
     const response = await axios.post('/api/auth/login', userData);
@@ -85,10 +89,13 @@ export const signIn = (userData) => async (dispatch) => {
     } else {
       dispatch(negativeFeedback('Login no disponible'));
     }
+  } finally {
+    dispatch(stopLoading());
   }
 }
 
 export const getUser = () => async (dispatch, getState) => {
+  dispatch(startLoading());
   const state = getState();
   const axios = getAxios(state.user.token);
   try {
@@ -102,6 +109,7 @@ export const getUser = () => async (dispatch, getState) => {
     console.log(error);
   } finally {
     dispatch(initialized());
+    dispatch(stopLoading());
   }
 }
 
