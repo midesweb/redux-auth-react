@@ -43,7 +43,7 @@ const { registerUser, setRegisterValidationErrors, setLoginValidationErrors, log
 export const { registerToken, initialized } = userSlice.actions;
 
 export const signUp = (userData) => async (dispatch) => {
-  dispatch(startLoading())
+  dispatch(startLoading());
   const axios = getAxios();
   try {
     const response = await axios.post('/api/auth/register', userData);
@@ -70,7 +70,7 @@ export const signUp = (userData) => async (dispatch) => {
 } 
 
 export const signIn = (userData) => async (dispatch) => {
-  dispatch(startLoading())
+  dispatch(startLoading());
   const axios = getAxios();
   try {
     const response = await axios.post('/api/auth/login', userData);
