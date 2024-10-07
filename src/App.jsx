@@ -6,6 +6,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
 import Feedback from './components/Feedback';
+import './components/utils/ra-feedback'
+import './components/utils/ra-loading'
 
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ function App() {
   }, [dispatch]);
 
   if (!isInitialized) {
-    return <div>Cargando...</div>;
+    return <div>Cargando...<ra-loading></ra-loading></div>;
   }
 
   return (
@@ -41,8 +43,10 @@ function App() {
         </Router>
       </div>
       <footer>
-        © 2023 Mi Aplicación
+        © 2024 Mi Aplicación
       </footer>
+      <ra-feedback></ra-feedback>
+      <ra-loading></ra-loading>
     </>
   );
 }
